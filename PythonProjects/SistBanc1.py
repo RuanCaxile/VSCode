@@ -40,7 +40,7 @@ while True:
             if len(listaSaque) == 0:
                 print("Não há registro de saques!")
             else:
-                print(f"Saque de  R$")
+                print(f"Saque de  R$ {_}")
     elif operacao_escolhida == 'q':
         break
     else:
