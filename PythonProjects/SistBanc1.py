@@ -36,12 +36,14 @@ while True:
                 print("Não há registro de depósitos")
             else:
                 print(f"Depósito de R$ {_}")
-        print(f"O seu saldo atual é R$ {saldoAtual}")
+        
         for _ in listaSaque:
             if len(listaSaque) == 0:
                 print("Não há registro de saques!")
             else:
                 print(f"Saque de  R$ {_}")
+        print(f"O seu saldo atual é R$ {saldoAtual}")
+        
     elif operacao_escolhida == 'q':
         break
     else:
