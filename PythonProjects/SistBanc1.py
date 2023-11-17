@@ -1,12 +1,3 @@
-operacao_escolhida = input(
-    """
-    Escolha a operação bancária!
-    [d] Depósito
-    [s] Sacar
-    [e] Extrato
-    [q] Sair
-    \n
-    """)
 saldoAtual = 0
 listaDeposito = []
 listaSaque = []
@@ -16,6 +7,15 @@ LimiteSaques = 0
 extrato = ""
 
 while True:
+    operacao_escolhida = input(
+    """
+    Escolha a operação bancária!
+    [d] Depósito
+    [s] Sacar
+    [e] Extrato
+    [q] Sair
+    \n
+    """)
     if operacao_escolhida == 'd':
         deposito = float(input("Quanto você quer depositar ?"))
         listaDeposito.append(deposito)
