@@ -57,9 +57,7 @@ def contaCorrente(ag:int, numeroConta:int, cpfUsuario:int):
     listaConta.append(tuplaConta)
     return listaConta
 while True:
-    print('As Agências e Contas disponíveis a serem visualizadas são: ')
-    for s in listaContas:
-        print(f'{listaContas}')
+
     operacao_escolhida = input(
     """
     Escolha a operação bancária!
@@ -71,51 +69,59 @@ while True:
     [q] Sair
     
     """)
-    if operacao_escolhida == 'd':
-        contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
-        deposita = float(input("Quanto você quer depositar ? "))
-        saldoDaConta, listaDepositoConta= listaContas[contaEscolhida][3], listaContas[contaEscolhida][4]
-        depositar(saldoDaConta,deposita,listaDepositoConta)
-    elif operacao_escolhida == 's':
-        contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
-        saca = float(input("Quanto você quer sacar ? "))
-        saldoDaConta, listaSacaConta= listaContas[contaEscolhida][3], listaContas[contaEscolhida][5]
-        sacar(saldo=saldoDaConta, valorSacado=saca, extratoSaque=listaSacaConta,qntdeSaque=1, LimiteSaques=3)
-    elif operacao_escolhida == 'e':
-        contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
-        saldoDaConta, listaDepositoConta, listaSacaConta= listaContas[contaEscolhida][3],listaContas[contaEscolhida][4], listaContas[contaEscolhida][5]
-        visualizarExtrato(saldoDaConta, extratoDeposito=listaDepositoConta, extratoSaque=listaSacaConta)
-    elif operacao_escolhida == 'u':
-        nome = input("Qual o seu nome ? ")
-        dataNasc = input("Qual a sua data de nascimento ? ")
-        end = input("Qual o seu endereço ? ")
-        cpf = int(input("Qual o seu CPF ? "))
-        if len(listaUsuarios) == 0:
-            listaUsuarios = listaUsuarios + criarUsuario(nome, dataNasc, end, cpf)
-        else:
-            for j in listaUsuarios:
-                if j['cpf'] != cpf:
-                    listaUsuarios = listaUsuarios + criarUsuario(nome, dataNasc, end, cpf)
-                else:
-                    print('CPF já cadastrado!')
-                    continue
-    elif operacao_escolhida == 'cc':
-        cpfUsuario = int(input("Escolha um CPF válido para criar sua conta: "))
-        if len(listaUsuarios) != 0:
-            for _ in listaUsuarios:
-                if _['cpf'] != cpfUsuario:
-                    agencia = int(input("Escolha a agência: "))
-                    contaDoBanco = int(input("Escolha a conta:"))
-                    for k in listaContas:
-                        if k[1] != contaDoBanco:
-                            listaContas = listaContas + contaCorrente(agencia, contaDoBanco, cpfUsuario)
-                        else:
-                            continue
-                else:
-                    continue
+    try:
+        print('As Agências e Contas disponíveis a serem visualizadas são: ')
+        for s in listaContas:
+            print(f'{listaContas}')
+        if operacao_escolhida == 'd':
+            contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
+            deposita = float(input("Quanto você quer depositar ? "))
+            saldoDaConta, listaDepositoConta= listaContas[contaEscolhida][3], listaContas[contaEscolhida][4]
+            depositar(saldoDaConta,deposita,listaDepositoConta)
+        elif operacao_escolhida == 's':
+            contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
+            saca = float(input("Quanto você quer sacar ? "))
+            saldoDaConta, listaSacaConta= listaContas[contaEscolhida][3], listaContas[contaEscolhida][5]
+            sacar(saldo=saldoDaConta, valorSacado=saca, extratoSaque=listaSacaConta,qntdeSaque=1, LimiteSaques=3)
+        elif operacao_escolhida == 'e':
+            contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
+            saldoDaConta, listaDepositoConta, listaSacaConta= listaContas[contaEscolhida][3],listaContas[contaEscolhida][4], listaContas[contaEscolhida][5]
+            visualizarExtrato(saldoDaConta, extratoDeposito=listaDepositoConta, extratoSaque=listaSacaConta)
+        elif operacao_escolhida == 'u':
+            nome = input("Qual o seu nome ? ")
+            dataNasc = input("Qual a sua data de nascimento ? ")
+            end = input("Qual o seu endereço ? ")
+            cpf = int(input("Qual o seu CPF ? "))
+            if len(listaUsuarios) == 0:
+                listaUsuarios = listaUsuarios + criarUsuario(nome, dataNasc, end, cpf)
+            else:
+                for j in listaUsuarios:
+                    if j['cpf'] != cpf:
+                        listaUsuarios = listaUsuarios + criarUsuario(nome, dataNasc, end, cpf)
+                    else:
+                        print('CPF já cadastrado!')
+                        continue
+        elif operacao_escolhida == 'cc':
+            cpfUsuario = int(input("Escolha um CPF válido para criar sua conta: "))
+            if len(listaUsuarios) != 0:
+                for _ in listaUsuarios:
+                    if _['cpf'] != cpfUsuario:
+                        agencia = int(input("Escolha a agência: "))
+                        contaDoBanco = int(input("Escolha a conta:"))
+                        for k in listaContas:
+                            if k[1] != contaDoBanco:
+                                listaContas = listaContas + contaCorrente(agencia, contaDoBanco, cpfUsuario)
+                            else:
+                                continue
+                    else:
+                        continue
+            else:
+                continue
+        elif operacao_escolhida == 'q':
+            break
         else:
             continue
-    elif operacao_escolhida == 'q':
-        break
-    else:
-        continue
+    except:
+        if operacao_escolhida == 'd' or operacao_escolhida == 'e' or operacao_escolhida =='s':
+            print("Operação inválida! Você não possui usuários ou contas para realizar a operação selecionada")
+            continue
