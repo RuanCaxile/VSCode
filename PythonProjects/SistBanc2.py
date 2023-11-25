@@ -1,24 +1,16 @@
-saldoAtual = 0
-listaDeposito = []
-listaSaque = []
-deposito = 0 
-saca = 0 
-numeroSaques = 0
-
-extrato = ""
-
+listaContas = []
+listaUsuarios = []
 def sacar(*,saldo:float, valorSacado:float, extratoSaque:list, qntdeSaque:int, LimiteSaques:int): #argumentos nomeados, keyword only
     #retorna saldo e extrato
     for i in range(qntdeSaque):
         if qntdeSaque > LimiteSaques:
+            print("Quantidade de Saques pedidos excedida!")
             return saldo, extratoSaque
         else:
             saldo -= valorSacado
             extratoSaque.append(valorSacado)
             return saldo, extratoSaque
     
-
-
 def depositar(saldo:float,valorDepositado:float,extratoDeposito:list): #argumentos posicionais, positional only
     #retorna saldo e extrato
     saldo += valorDepositado
@@ -34,13 +26,13 @@ def visualizarExtrato(saldo:float,*,extratoSaque:list, extratoDeposito:list): #a
             print(f"Depósito de R$ {_}")
         
     for _ in extratoSaque:
-        if len(listaSaque) == 0:
+        if len(extratoSaque) == 0:
             print("Não há registro de saques!")
         else:
             print(f"Saque de  R$ {_}")
         print(f"O seu saldo atual é R$ {saldo}")
 
-def criarUsuario(nome:str, dataNascimento:str, cpf:int, endereco:str):
+def criarUsuario(nome:str, dataNascimento:str, endereco:str, cpf:int):
     #retorna lista de dicionarios
     listaUsuario = []
     dicUsuario = {
@@ -53,11 +45,21 @@ def criarUsuario(nome:str, dataNascimento:str, cpf:int, endereco:str):
     listaUsuario.append(dicUsuario)
     return listaUsuario
 
+
+
 def contaCorrente(ag:int, numeroConta:int, cpfUsuario:int):
     #retorna uma lista de tuplas (formada por ag, conta, cpfUsuario)
-    return ag, numeroConta, cpfUsuario
-
+    listaDepositoConta = []
+    listaSacaConta = []
+    saldoConta = 0
+    listaConta =[]
+    tuplaConta = ag, numeroConta, cpfUsuario, saldoConta, listaDepositoConta, listaSacaConta
+    listaConta.append(tuplaConta)
+    return listaConta
 while True:
+    print('As Agências e Contas disponíveis a serem visualizadas são: ')
+    for s in listaContas:
+        print(f'{listaContas}')
     operacao_escolhida = input(
     """
     Escolha a operação bancária!
@@ -70,17 +72,49 @@ while True:
     
     """)
     if operacao_escolhida == 'd':
-        deposito = float(input("Quanto você quer depositar ?"))
-        listaDeposito.append(deposito)
-        saldoAtual += deposito
+        contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
+        deposita = float(input("Quanto você quer depositar ? "))
+        saldoDaConta, listaDepositoConta= listaContas[contaEscolhida][3], listaContas[contaEscolhida][4]
+        depositar(saldoDaConta,deposita,listaDepositoConta)
     elif operacao_escolhida == 's':
-        pass
+        contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
+        saca = float(input("Quanto você quer sacar ? "))
+        saldoDaConta, listaSacaConta= listaContas[contaEscolhida][3], listaContas[contaEscolhida][5]
+        sacar(saldo=saldoDaConta, valorSacado=saca, extratoSaque=listaSacaConta,qntdeSaque=1, LimiteSaques=3)
     elif operacao_escolhida == 'e':
-        pass
+        contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
+        saldoDaConta, listaDepositoConta, listaSacaConta= listaContas[contaEscolhida][3],listaContas[contaEscolhida][4], listaContas[contaEscolhida][5]
+        visualizarExtrato(saldoDaConta, extratoDeposito=listaDepositoConta, extratoSaque=listaSacaConta)
     elif operacao_escolhida == 'u':
-        pass
+        nome = input("Qual o seu nome ? ")
+        dataNasc = input("Qual a sua data de nascimento ? ")
+        end = input("Qual o seu endereço ? ")
+        cpf = int(input("Qual o seu CPF ? "))
+        if len(listaUsuarios) == 0:
+            listaUsuarios = listaUsuarios + criarUsuario(nome, dataNasc, end, cpf)
+        else:
+            for j in listaUsuarios:
+                if j['cpf'] != cpf:
+                    listaUsuarios = listaUsuarios + criarUsuario(nome, dataNasc, end, cpf)
+                else:
+                    print('CPF já cadastrado!')
+                    continue
     elif operacao_escolhida == 'cc':
-        pass
+        cpfUsuario = int(input("Escolha um CPF válido para criar sua conta: "))
+        if len(listaUsuarios) != 0:
+            for _ in listaUsuarios:
+                if _['cpf'] != cpfUsuario:
+                    agencia = int(input("Escolha a agência: "))
+                    contaDoBanco = int(input("Escolha a conta:"))
+                    for k in listaContas:
+                        if k[1] != contaDoBanco:
+                            listaContas = listaContas + contaCorrente(agencia, contaDoBanco, cpfUsuario)
+                        else:
+                            continue
+                else:
+                    continue
+        else:
+            continue
     elif operacao_escolhida == 'q':
         break
     else:
