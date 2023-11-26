@@ -61,8 +61,8 @@ def contaCorrente(ag:int, numeroConta:int, cpfUsuario:int):
     listaSacaConta = []
     saldoConta = 0
     listaConta =[]
-    tuplaConta = ag, numeroConta, cpfUsuario, saldoConta, listaDepositoConta, listaSacaConta
-    listaConta.append(tuplaConta)
+    listaDaListaConta = [ag, numeroConta, cpfUsuario, saldoConta, listaDepositoConta, listaSacaConta]
+    listaConta.append(listaDaListaConta)
     return listaConta
 while True:
     operacao_escolhida = input(
