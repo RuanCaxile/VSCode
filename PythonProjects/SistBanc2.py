@@ -7,12 +7,12 @@ def sacar(*,saldo:float, valorSacado:float, extratoSaque:list, qntdeSaque:int, L
             print("Quantidade de Saques pedidos excedida!")
             return saldo, extratoSaque
         else:
-            if valorSacado <= saldo:
+            if valorSacado <= saldo and valorSacado != 0:
                 saldo -= valorSacado
                 extratoSaque.append(valorSacado)
                 return saldo, extratoSaque
             else: 
-                print("Operação proibida! Saldo insuficiente.")
+                print("Operação proibida!")
                 return saldo, extratoSaque
             
 def depositar(saldo:float,valorDepositado:float,extratoDeposito:list): #argumentos posicionais, positional only
@@ -82,12 +82,14 @@ while True:
         contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
         deposita = float(input("Quanto você quer depositar ? "))
         saldoDaConta, listaDepositoConta= listaContas[contaEscolhida-1][3], listaContas[contaEscolhida-1][4]
-        saldoDaConta, listaDepositoConta= depositar(saldoDaConta,deposita,listaDepositoConta)
+        listaContas[contaEscolhida-1][3], listaDepositoConta= depositar(saldoDaConta,deposita,listaDepositoConta)
+        saldoDaConta = listaContas[contaEscolhida-1][3]
     elif operacao_escolhida == 's':
         contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
         saca = float(input("Quanto você quer sacar ? "))
         saldoDaConta, listaSacaConta= listaContas[contaEscolhida-1][3], listaContas[contaEscolhida-1][5]
-        saldoDaConta, listaSacaConta= sacar(saldo=saldoDaConta, valorSacado=saca, extratoSaque=listaSacaConta,qntdeSaque=1, LimiteSaques=3)
+        listaContas[contaEscolhida-1][3], listaSacaConta= sacar(saldo=saldoDaConta, valorSacado=saca, extratoSaque=listaSacaConta,qntdeSaque=1, LimiteSaques=3)
+        saldoDaConta = listaContas[contaEscolhida-1][3]
     elif operacao_escolhida == 'e':
         contaEscolhida = int(input(f"(Escolha um número entre 1 e {len(listaContas)} Essa operação será realizada para a conta: "))
         saldoDaConta, listaDepositoConta, listaSacaConta= listaContas[contaEscolhida-1][3],listaContas[contaEscolhida-1][4], listaContas[contaEscolhida-1][5]
