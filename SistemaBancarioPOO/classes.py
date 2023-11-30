@@ -6,10 +6,10 @@ class Cliente:
       self.endereco = endereco
       self.contas = contas
    
-   def realizar_transacao(conta: Conta, transacao: Transacao):
+   def realizar_transacao(self,conta: Conta, transacao: Transacao):
        pass
    
-   def adicionar_conta(conta:Conta):
+   def adicionar_conta(self,conta:Conta):
        pass
 
 
