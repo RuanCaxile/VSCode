@@ -1,5 +1,5 @@
 from datetime import date
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractclassmethod, abstractproperty
 
 class Cliente:
    def __init__(self, endereco:str) -> None:
@@ -79,6 +79,11 @@ class Historico:
 
 class Transacao(ABC):
 
+    @property
+    @abstractproperty
+    def valor(self):
+        pass
+
     @abstractmethod
     def registrar(self):
         pass
@@ -86,7 +91,11 @@ class Transacao(ABC):
 class Deposito(Transacao):
     def __init__(self, valor:float) -> None:
         super().__init__()
-        self.valor = valor
+        self._valor = valor
+
+    @property
+    def valor(self):
+        pass
 
     def registrar(self):
         pass
@@ -94,8 +103,12 @@ class Deposito(Transacao):
 class Saque(Transacao):
     def __init__(self, valor:float) -> None:
         super().__init__()
-        self.valor = valor
-    
+        self._valor = valor
+
+    @property
+    def valor(self):
+        pass
+
     def registrar(self):
         pass
 
