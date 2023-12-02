@@ -7,10 +7,11 @@ class Cliente:
       self.contas = []
    
    def realizar_transacao(self,conta, transacao):
-       pass
+       if isinstance(transacao,Transacao):
+        transacao.registrar(conta)
    
    def adicionar_conta(self,conta):
-       pass
+       self.contas.append(conta)
 
 
 
@@ -33,31 +34,46 @@ class Conta:
     
     @property
     def saldo(self) -> float:
-        pass
+        return self._saldo
 
     @classmethod
-    def nova_conta(self,cliente:Cliente, numero:int):
-        pass
+    def nova_conta(cls, numero, cliente):
+        return cls(numero, cliente)
 
     @property    
     def sacar(self, valor:float) -> bool:
-        pass
-    
+        pode_sacar = self._saldo >= self.cliente.limite and valor > 0
+
+        if pode_sacar:
+            self._saldo -= valor
+            print("Operação realizada com sucesso!!!")
+            return True
+        else:
+            print("Operação não realizada! Por gentileza, verifique seu limite e o valor informado.")
+        return False
+  
     @property
     def depositar(self, valor:float) -> bool:
-        pass
-
+        pode_depositar = valor > 0
+        if pode_depositar:
+            self._saldo += valor
+            print("Operação realizada com sucesso!!!")
+            return True
+        else:
+            print("Operação não realizada! O valor informado é inválido.")
+        
+        return False
     @property
     def agencia(self):
-        pass
+        return self._agencia
 
     @property
     def cliente(self):
-        pass
+        return self.cliente
 
     @property
     def historico(self):
-        pass
+        return self._historico.transacoes()        
 
 class ContaCorrente(Conta):
     def __init__(self, numero: int, cliente: Cliente, limite= 500, limite_saques=3) -> None:
@@ -74,7 +90,7 @@ class Historico:
 
 
     def adicionar_transacao(self, transacao):
-        pass
+        self._transacao.append(transacao)
 
 
 class Transacao(ABC):
@@ -97,8 +113,8 @@ class Deposito(Transacao):
     def valor(self):
         return self._valor
 
-    def registrar(self):
-        pass
+    def registrar(self, conta):
+        pass 
 
 class Saque(Transacao):
     def __init__(self, valor:float) -> None:
@@ -109,6 +125,6 @@ class Saque(Transacao):
     def valor(self):
         return self._valor
 
-    def registrar(self):
+    def registrar(self, conta):
         pass
 
