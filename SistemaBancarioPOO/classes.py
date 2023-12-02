@@ -70,7 +70,7 @@ class Historico:
         self._transacao = []
 
     def transacoes(self):
-        pass
+        return self._transacao
 
 
     def adicionar_transacao(self, transacao):
@@ -95,7 +95,7 @@ class Deposito(Transacao):
 
     @property
     def valor(self):
-        pass
+        return self._valor
 
     def registrar(self):
         pass
@@ -107,7 +107,7 @@ class Saque(Transacao):
 
     @property
     def valor(self):
-        pass
+        return self._valor
 
     def registrar(self):
         pass
