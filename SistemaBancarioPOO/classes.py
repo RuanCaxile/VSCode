@@ -37,7 +37,7 @@ class Conta:
         return self._saldo
 
     @classmethod
-    def nova_conta(cls, numero, cliente):
+    def nova_conta(cls, cliente, numero):
         return cls(numero, cliente)
 
     @property    

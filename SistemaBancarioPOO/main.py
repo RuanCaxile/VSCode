@@ -1,6 +1,5 @@
 import textwrap
 from classes import *
-
 def menu():
     menu = """\n
     ================ MENU ================
@@ -116,14 +115,14 @@ def criar_conta(numero_conta, clientes, contas):
     cliente = filtrar_cliente(cpf, clientes)
 
     if not cliente:
-        print("\n@@@ Cliente não encontrado, fluxo de criação de conta encerrado! @@@")
+        print("Cliente não encontrado, fluxo de criação de conta encerrado!")
         return
 
     conta = ContaCorrente.nova_conta(cliente=cliente, numero=numero_conta)
     contas.append(conta)
     cliente.contas.append(conta)
 
-    print("\n=== Conta criada com sucesso! ===")
+    print("Conta criada com sucesso!")
 
 
 def listar_contas(contas):
