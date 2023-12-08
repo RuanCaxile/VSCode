@@ -52,7 +52,7 @@ class Conta:
         return False
   
     @property
-    def depositar(self, valor:float) -> bool:
+    def depositar(self, valor) -> bool:
         pode_depositar = valor > 0
         if pode_depositar:
             self._saldo += valor
