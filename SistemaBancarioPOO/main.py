@@ -51,7 +51,7 @@ def sacar(clientes):
     cliente = filtrar_cliente(cpf, clientes)
 
     if not cliente:
-        print("\n@@@ Cliente não encontrado! @@@")
+        print("Cliente não encontrado!")
         return
 
     valor = float(input("Informe o valor do saque: "))
@@ -69,7 +69,7 @@ def exibir_extrato(clientes):
     cliente = filtrar_cliente(cpf, clientes)
 
     if not cliente:
-        print("\n@@@ Cliente não encontrado! @@@")
+        print("Cliente não encontrado!")
         return
 
     conta = recuperar_conta_cliente(cliente)
@@ -96,7 +96,7 @@ def criar_cliente(clientes):
     cliente = filtrar_cliente(cpf, clientes)
 
     if cliente:
-        print("\n@@@ Já existe cliente com esse CPF! @@@")
+        print("Já existe cliente com esse CPF!")
         return
 
     nome = input("Informe o nome completo: ")
@@ -107,7 +107,7 @@ def criar_cliente(clientes):
 
     clientes.append(cliente)
 
-    print("\n=== Cliente criado com sucesso! ===")
+    print("Cliente criado com sucesso!")
 
 
 def criar_conta(numero_conta, clientes, contas):

@@ -7,7 +7,6 @@ class Cliente:
       self.contas = []
    
    def realizar_transacao(self,conta, transacao):
-       if isinstance(transacao,Transacao):
         transacao.registrar(conta)
    
    def adicionar_conta(self,conta):
@@ -16,7 +15,7 @@ class Cliente:
 
 
 class PessoaFisica(Cliente):
-    def __init__(self, endereco: str, cpf: str, nome:str, data_nascimento:str) -> None:
+    def __init__(self, nome:str, data_nascimento, cpf:str, endereco:str) -> None:
         super().__init__(endereco)
         self.cpf = cpf
         self.nome = nome
@@ -30,7 +29,7 @@ class Conta:
         self._numero = numero
         self._agencia = "0001"
         self._historico = Historico()
-        self.cliente = cliente
+        self._cliente = cliente
     
     @property
     def saldo(self) -> float:
