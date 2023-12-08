@@ -110,7 +110,7 @@ class Transacao(ABC):
         pass
 
 class Deposito(Transacao):
-    def __init__(self, valor:float) -> None:
+    def __init__(self, valor) -> None:
         super().__init__()
         self._valor = valor
 
@@ -119,7 +119,7 @@ class Deposito(Transacao):
         return self._valor
 
     def registrar(self, conta):
-        sucesso_deposito = conta.depositar(self._valor)
+        sucesso_deposito = conta.depositar(self.valor)
 
         if sucesso_deposito:
             conta.historico.adicionar_transacao(self)
