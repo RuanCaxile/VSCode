@@ -38,7 +38,7 @@ def depositar(clientes):
 
     valor = float(input("Informe o valor do depósito: "))
     transacao = Deposito(valor)
-
+    
     conta = recuperar_conta_cliente(cliente)
     if not conta:
         return
