@@ -46,13 +46,12 @@ class Conta:
         if pode_sacar:
             self._saldo -= valor
             print("Operação realizada com sucesso!!!")
-            return True
         else:
             print("Operação não realizada! Por gentileza, verifique seu limite e o valor informado.")
-        return False
-  
+            return False
+        return True
     @property
-    def depositar(self, valor) -> bool:
+    def depositar(self, valor:float) -> bool:
         pode_depositar = valor > 0
         if pode_depositar:
             self._saldo += valor
@@ -115,10 +114,11 @@ class Deposito(Transacao):
         self._valor = valor
 
     @property
-    def valor(self):
+    def valor(self) -> float:
         return self._valor
 
     def registrar(self, conta:Conta):
+        print(self.valor)
         sucesso_deposito = conta.depositar(self.valor)
 
         if sucesso_deposito:
