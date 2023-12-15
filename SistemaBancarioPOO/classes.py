@@ -118,7 +118,7 @@ class Deposito(Transacao):
     def valor(self) -> float:
         return self._valor
 
-    def registrar(self, conta:Conta):
+    def registrar(self, conta):
         print(self.valor)
         sucesso_deposito = conta.depositar(valor=self.valor)
 
