@@ -53,6 +53,7 @@ class Conta:
     @property
     def depositar(self, valor:float) -> bool:
         pode_depositar = valor > 0
+        print(pode_depositar)
         if pode_depositar:
             self._saldo += valor
             print("Operação realizada com sucesso!!!")
