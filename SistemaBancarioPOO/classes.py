@@ -39,7 +39,7 @@ class Conta:
     def nova_conta(cls, cliente, numero):
         return cls(numero, cliente)
 
-    @property    
+  
     def sacar(self, valor:float) -> bool:
         pode_sacar = self._saldo >= self.cliente.limite and valor > 0
 
@@ -50,7 +50,7 @@ class Conta:
             print("Operação não realizada! Por gentileza, verifique seu limite e o valor informado.")
             return False
         return True
-    @property
+    
     def depositar(self, valor:float) -> bool:
         pode_depositar = valor > 0
         print(pode_depositar)
