@@ -39,7 +39,7 @@ class Conta:
     def nova_conta(cls, cliente, numero):
         return cls(numero, cliente)
 
-  
+
     def sacar(self, valor:float) -> bool:
         pode_sacar = self._saldo >= self.cliente.limite and valor > 0
 
@@ -72,7 +72,7 @@ class Conta:
 
     @property
     def historico(self):
-        return self._historico.transacoes()        
+        return self._historico      
 
 class ContaCorrente(Conta):
     def __init__(self, numero: int, cliente: Cliente, limite= 500, limite_saques=3) -> None:
@@ -119,7 +119,6 @@ class Deposito(Transacao):
         return self._valor
 
     def registrar(self, conta):
-        print(self.valor)
         sucesso_deposito = conta.depositar(valor=self.valor)
 
         if sucesso_deposito:

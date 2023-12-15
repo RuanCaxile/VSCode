@@ -1,5 +1,5 @@
 import textwrap
-import classes
+from classes import *
 def menu():
     menu = """\n
     ================ MENU ================
