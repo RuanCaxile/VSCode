@@ -76,8 +76,16 @@ class Conta:
 class ContaCorrente(Conta):
     def __init__(self, numero: int, cliente: Cliente, limite= 500, limite_saques=3) -> None:
         super().__init__(numero, cliente)
-        self.limite = limite
-        self.limite_saques = limite_saques
+        self._limite = limite
+        self._limite_saques = limite_saques
+
+    def sacar(self, valor):
+        numero_saques = len(
+            [transacao for transacao in self.historico.transacoes if transacao["tipo"] == Saque.__name__]
+        )
+
+        excedeu_limite = valor > self._limite
+        excedeu_saques = numero_saques >= self._limite_saques
 
 class Historico:
     def __init__(self) -> None:
