@@ -41,13 +41,13 @@ class Conta:
 
 
     def sacar(self, valor:float) -> bool:
-        pode_sacar = self._saldo >= self.cliente.limite and valor > 0
+        pode_sacar = self.saldo >= valor and valor > 0
 
         if pode_sacar:
             self._saldo -= valor
             print("Operação realizada com sucesso!!!")
         else:
-            print("Operação não realizada! Por gentileza, verifique seu limite e o valor informado.")
+            print("Operação não realizada! Por gentileza, verifique seu limite e se o valor informado possui na conta.")
             return False
         return True
     
