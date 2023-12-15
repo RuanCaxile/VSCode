@@ -91,6 +91,7 @@ class Historico:
     def __init__(self) -> None:
         self._transacao = []
 
+    @property
     def transacoes(self):
         return self._transacao
 
