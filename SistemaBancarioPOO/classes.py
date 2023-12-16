@@ -47,10 +47,11 @@ class Conta:
         if pode_sacar:
             self._saldo -= valor
             print("Operação realizada com sucesso!!!")
+            return True
         else:
             print("Operação não realizada! Por gentileza, verifique seu limite e se o valor informado possui na conta.")
             return False
-        return True
+        
     
     def depositar(self, valor:float) -> bool:
         pode_depositar = valor > 0
