@@ -2,7 +2,7 @@ from datetime import datetime
 from abc import ABC, abstractmethod, abstractclassmethod, abstractproperty
 import textwrap
 class Cliente:
-   def __init__(self, endereco:str) -> None:
+   def __init__(self, endereco:str):
       self.endereco = endereco
       self.contas = []
    
@@ -24,7 +24,7 @@ class PessoaFisica(Cliente):
 
 
 class Conta:
-    def __init__(self,numero:int, cliente:Cliente) -> None:
+    def __init__(self,numero:int, cliente:Cliente):
         self._saldo = 0
         self._numero = numero
         self._agencia = "0001"
@@ -76,7 +76,7 @@ class Conta:
         return self._historico      
 
 class ContaCorrente(Conta):
-    def __init__(self, numero: int, cliente: Cliente, limite= 500, limite_saques=3) -> None:
+    def __init__(self, numero: int, cliente: Cliente, limite= 500, limite_saques=3):
         super().__init__(numero, cliente)
         self._limite = limite
         self._limite_saques = limite_saques
@@ -90,7 +90,7 @@ class ContaCorrente(Conta):
         excedeu_saques = numero_saques >= self._limite_saques
 
 class Historico:
-    def __init__(self) -> None:
+    def __init__(self):
         self._transacao = []
 
     @property
@@ -120,7 +120,7 @@ class Transacao(ABC):
         pass
 
 class Deposito(Transacao):
-    def __init__(self, valor) -> None:
+    def __init__(self, valor):
         super().__init__()
         self._valor = valor
 
@@ -135,7 +135,7 @@ class Deposito(Transacao):
             conta.historico.adicionar_transacao(self)
 
 class Saque(Transacao):
-    def __init__(self, valor:float) -> None:
+    def __init__(self, valor:float):
         super().__init__()
         self._valor = valor
 
