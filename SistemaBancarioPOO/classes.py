@@ -41,7 +41,7 @@ class Conta:
 
 
     def sacar(self, valor:float) -> bool:
-        saldo = self.saldo
+        saldo = self._saldo
         pode_sacar = ((saldo >= valor) and (valor > 0))
 
         if pode_sacar:
