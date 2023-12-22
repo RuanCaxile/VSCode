@@ -91,6 +91,17 @@ class ContaCorrente(Conta):
         excedeu_limite = valor > self._limite
         excedeu_saques = numero_saques >= self._limite_saques
 
+        if excedeu_limite:
+            print("O valor do saque excede o limite!!!")
+        
+        elif excedeu_saques:
+            print("Você excedeu a quantidade de saques!")
+        
+        else:
+            return super().sacar(valor)
+        
+        return False
+
 class Historico:
     def __init__(self):
         self._transacao = []
