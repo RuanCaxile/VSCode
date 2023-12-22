@@ -41,15 +41,17 @@ class Conta:
 
 
     def sacar(self, valor:float) -> bool:
-        saldo = self._saldo
-        pode_sacar = ((saldo >= valor) and (valor > 0))
+        saldo = self.saldo
+        excedeu_saldo = valor > saldo
 
-        if pode_sacar:
+        if excedeu_saldo:
+            print("Operação não realizada, verifique o saldo!")
+        elif valor > 0:
             self._saldo -= valor
             print("Operação realizada com sucesso!!!")
             return True
         else:
-            print("Operação não realizada! Por gentileza, verifique seu limite e se o valor informado possui na conta.")
+            print("Operação não realizada! O valor informado é incorreto.")
         return False
         
     
